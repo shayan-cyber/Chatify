@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg-primary{
+  @apply dark:bg-black bg-white;
+}
+.text-primary{
+  @apply text-black dark:text-white;
+}
+.border-primary{
+  @apply dark:border-white border-black;
+}
+.bg-secondary{
+  @apply dark:bg-gray-900 bg-gray-100;
+}
+
+.bg-secondary-hover:hover{
+  @apply bg-secondary;
+}

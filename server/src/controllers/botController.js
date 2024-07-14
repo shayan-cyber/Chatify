@@ -26,3 +26,8 @@ export const uploadImage = async (req, res) => {
   console.log({analyzedText});
   res.json(analyzedText);
 };
+
+export const getImageAnalysishistory = async (req, res) => {
+    const results = await Result.find({});
+    res.json(results);
+}

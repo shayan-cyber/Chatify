@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000'
+const SERVER_URL = process.env.VITE_SERVER_URL || 'http://localhost:3000'
 
 export const analyzeImage = async (image: File, text: string) => {
     try {
@@ -21,4 +21,16 @@ export const analyzeImage = async (image: File, text: string) => {
         console.log(error)
     }
 
+}
+
+
+export const getImageAnalysishistory = async () => {
+    try {
+        const response = await axios.get(`${SERVER_URL}/api/bot/history`)
+        console.log(response.data)
+        return response.data
+    }
+    catch (error) {
+        console.log(error)
+    }
 }

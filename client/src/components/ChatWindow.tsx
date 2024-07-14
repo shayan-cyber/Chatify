@@ -5,55 +5,107 @@ import ChatInput from './ChatInput'
 import { analyzeImage } from '../utils/apiCall'
 import { ChatResponse } from '../types'
 import { toast } from 'sonner'
+import { getAnswer } from '../utils/gemini'
+import { Brain, ChevronRight } from 'lucide-react'
+import NavBar from './NavBar'
+import SideBar from './SideBar'
 function ChatWindow() {
 
     const [image, setImage] = useState<File | null>(null)
     const [response, setResponse] = useState<ChatResponse[]>([])
     const [text, setText] = useState<string>("")
-    const [allowQuestions, setAllowQuestions] = useState<boolean>(true)
+    const [allowQuestions, setAllowQuestions] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
     const handleSend = async (image: File | null, text: string) => {
-
-        if (image) {
-            try {
-                const res = await analyzeImage(image, text)
-                console.log(response)
-                setResponse([{
+        setIsLoading(true)
+        if (!image) {
+            toast.error("Please upload an image")
+            setIsLoading(false)
+            return
+        }
+        if (!text) {
+            toast.error("Please enter a text")
+            setIsLoading(false)
+            return
+        }
+        try {
+            const res = await analyzeImage(image, text)
+            console.log(response)
+            setResponse([
+                ...response,
+                {
+                    type: "userMessage",
+                    data: text,
                     image: image,
+                },
+                {
                     type: "analyzedImageText",
                     data: res,
-                    text:text? text : ""
-                }, ...response
-                ])
-                setAllowQuestions(true)
-            } catch (e) {
-                console.log(e)
-            }
+                }
 
-        }else{
-            toast.error("Please upload an image")
+            ])
+            setAllowQuestions(true)
+            setIsLoading(false)
+            setText("")
+            setImage(null)
+        } catch (e) {
+            toast.error("Something went wrong")
+            console.log(e)
         }
+        setIsLoading(false)
+    }
+
+    const handleAskQuestionFromGemini = async (text: string) => {
+        setIsLoading(true)
+        if (!text) {
+            toast.error("Please enter a text")
+            setIsLoading(false)
+            return
+        }
+        try {
+            const descriptions = response.filter(r => r.type === "analyzedImageText").map(r => r.data)
+            const res = await getAnswer(descriptions, text)
+            console.log({ res })
+            if (res) {
+                setResponse([...response,
+                {
+                    type: "userMessage",
+                    data: text,
+                },
+                {
+                    type: "geminiText",
+                    data: res,
+                }])
+            }
+            setText("")
+
+        } catch (e) {
+            toast.error("Something went wrong")
+            console.log(e)
+        }
+        setIsLoading(false)
+
     }
 
     useEffect(() => {
         fetchTheme()
     }, [])
     return (
-        <div className='bg-primary text-primary border-primary w-full h-screen relative overflow-hidden'>
-            <div className='flex justify-between items-center w-full py-2 px-4'>
-                <h1>Chatify</h1>
-                <div className='flex items-center'>
+        <div className='bg-primary text-primary border-primary w-full h-screen relative overflow-hidden '>
 
-                    <button className='bg-primary text-primary border-primary px-4 py-2 rounded-md'>Embed</button>
-                    <button className='bg-primary text-primary border-primary px-4 py-2 rounded-md' onClick={() => {
-                        toggleTheme()
-                    }} >Dark Mode</button>
-                </div>
-            </div>
-
+            <button className='absolute top-1/2 left-2' onClick={() => setIsSidebarOpen(true)}>
+                <ChevronRight className='w-10 h-10' />
+            </button>
+            <NavBar toggleTheme={toggleTheme} />
+            {
+                isSidebarOpen &&
+                <SideBar setIsSidebarOpen={setIsSidebarOpen}/>
+            }
             <div className='overflow-y-auto h-full py-6'>
                 <Chats response={response} />
             </div>
-            <ChatInput image={image} setImage={setImage} text={text} setText={setText} handleSend={handleSend} allowQuestions={allowQuestions} setAllowQuestions={setAllowQuestions} />
+            <ChatInput image={image} setImage={setImage} text={text} setText={setText} handleSend={handleSend} allowQuestions={allowQuestions} setAllowQuestions={setAllowQuestions} isLoading={isLoading} handleAskQuestionFromGemini={handleAskQuestionFromGemini} />
         </div>
     )
 }

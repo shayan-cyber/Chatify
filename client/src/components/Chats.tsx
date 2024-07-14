@@ -7,7 +7,7 @@ function Chats({ response }: { response: ChatResponse[] }) {
   
 
   return (
-    <div className='px-6 pb-60'>
+    <div className='px-2 md:px-6 pb-60'>
       {response.map((item, index) => {
         return (
             <Chat chat={item} key={index} />

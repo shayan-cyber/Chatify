@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { fetchTheme, toggleTheme } from '../utils/themeToggler'
 import Chats from './Chats'
 import ChatInput from './ChatInput'
@@ -6,7 +6,7 @@ import { analyzeImage } from '../utils/apiCall'
 import { ChatResponse } from '../types'
 import { toast } from 'sonner'
 import { getAnswer } from '../utils/gemini'
-import { Brain, ChevronRight } from 'lucide-react'
+import {  ChevronRight } from 'lucide-react'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
 function ChatWindow() {
@@ -105,7 +105,7 @@ function ChatWindow() {
             <div className='overflow-y-auto h-full py-6'>
                 <Chats response={response} />
             </div>
-            <ChatInput image={image} setImage={setImage} text={text} setText={setText} handleSend={handleSend} allowQuestions={allowQuestions} setAllowQuestions={setAllowQuestions} isLoading={isLoading} handleAskQuestionFromGemini={handleAskQuestionFromGemini} />
+            <ChatInput image={image} setImage={setImage} text={text} setText={setText} handleSend={handleSend} allowQuestions={allowQuestions}  isLoading={isLoading} handleAskQuestionFromGemini={handleAskQuestionFromGemini} />
         </div>
     )
 }

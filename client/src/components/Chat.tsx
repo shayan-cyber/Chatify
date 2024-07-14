@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { ChatResponse } from '../types'
-import { Brain, Clipboard, Image, User, UserRound } from 'lucide-react'
+import { Brain, Clipboard, Image, UserRound } from 'lucide-react'
 function Chat({ chat }: { chat: ChatResponse }) {
     const [toggleImage, setToggleImage] = useState(false)
     return (

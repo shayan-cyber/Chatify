@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Brain } from 'lucide-react'
 function NavBar({toggleTheme}:{toggleTheme: () => void}) {
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { ImageAnalysisHistory } from '../types'
 import { Brain, Clipboard, Image } from 'lucide-react'
 function ImageAnalysisHistoryChat({ chat }: { chat: ImageAnalysisHistory }) {

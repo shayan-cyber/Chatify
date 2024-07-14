@@ -9,12 +9,12 @@ interface ChatInputProps {
     setText: Function,
     handleSend: Function,
     allowQuestions: boolean,
-    setAllowQuestions: Function,
+    
     isLoading: boolean,
     handleAskQuestionFromGemini: Function
 }
 
-function ChatInput({ image, setImage, text, setText, handleSend, allowQuestions, setAllowQuestions, isLoading, handleAskQuestionFromGemini }: ChatInputProps) {
+function ChatInput({ image, setImage, text, setText, handleSend, allowQuestions, isLoading, handleAskQuestionFromGemini }: ChatInputProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const [askingQuestion, setAskingQuestion] = useState(false);
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

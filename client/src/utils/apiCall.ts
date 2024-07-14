@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+
 const SERVER_URL = process.env.VITE_SERVER_URL || 'http://localhost:3000'
 
 export const analyzeImage = async (image: File, text: string) => {

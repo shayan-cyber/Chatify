@@ -1,5 +1,5 @@
-import { Brain, ChevronLeft, Clipboard } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { Brain, ChevronLeft } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { getImageAnalysishistory } from '../utils/apiCall'
 import { toast } from 'sonner'
 import { ImageAnalysisHistory } from '../types'
@@ -37,7 +37,9 @@ function SideBar({ setIsSidebarOpen }: { setIsSidebarOpen: Function }) {
                     {imageAnalysisHistory.map((chat, index) => {
                         return <>
 
-                            <ImageAnalysisHistoryChat chat={chat} />
+                            <ImageAnalysisHistoryChat chat={chat} key={
+                                index
+                            } />
                         </>
                     })}
 

@@ -1,33 +1,45 @@
 
-import {OCR} from '../services/OCR.js';
-import fs from 'fs';
+import { OCR } from '../services/OCR.js';
+import { uploadFile } from '../utils/storage.js';
+import { getDataURI } from '../utils/getDataURI.js';
 import path from 'path';
 import Result from '../models/result.js';
 export const uploadImage = async (req, res) => {
-    console.log("hello");
-  const image = req.file;
-  const {text} = req.body;
+  try {
 
-  console.log({text});
+    const image = req.file;
+    const { text } = req.body;
 
-  if (!image) {
-    return res.status(400).json({
-      message: 'No image provided',
+
+
+    if (!image) {
+      return res.status(400).json({
+        message: 'No image provided',
+      });
+    }
+    const dataURI = await getDataURI(image);
+    const { secure_url } = await uploadFile(dataURI);
+    const analyzedData = await OCR(secure_url);
+    const analyzedText = analyzedData.text;
+    
+
+    const newResult = new Result({
+      text: text,
+      imagePath: secure_url,
+      imageAnalyzedText: analyzedText,
+    })
+    await newResult.save();
+    console.log({ analyzedText });
+    res.json(analyzedText);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      message: 'Internal server error',
     });
   }
-  const analyzedData = await OCR(path.resolve(image.path));
-  const analyzedText = analyzedData.text;
-  const newResult = new Result({
-    text:text,
-    imagePath:image.path,
-    imageAnalyzedText:analyzedText,
-  })
-  await newResult.save();
-  console.log({analyzedText});
-  res.json(analyzedText);
 };
 
 export const getImageAnalysishistory = async (req, res) => {
-    const results = await Result.find({});
-    res.json(results);
+  const results = await Result.find({});
+  res.json(results);
 }

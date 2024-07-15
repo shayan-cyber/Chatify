@@ -1,7 +1,7 @@
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
 dotenv.config();
-import {CloudinaryStorage} from 'multer-storage-cloudinary';
+
 cloudinary.v2.config({
     cloud_name:process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_KEY,
@@ -18,7 +18,7 @@ export const uploadFile = async ( file) => {
             resource_type: 'image',
             invalidate: true,
         });
-        console.log( "res", {result});
+        
         return result;
 
     }catch(e){

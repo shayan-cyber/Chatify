@@ -2,7 +2,6 @@
 import { OCR } from '../services/OCR.js';
 import { uploadFile } from '../utils/storage.js';
 import { getDataURI } from '../utils/getDataURI.js';
-import path from 'path';
 import Result from '../models/result.js';
 export const uploadImage = async (req, res) => {
   try {
@@ -21,7 +20,7 @@ export const uploadImage = async (req, res) => {
     const { secure_url } = await uploadFile(dataURI);
     const analyzedData = await OCR(secure_url);
     const analyzedText = analyzedData.text;
-    
+
 
     const newResult = new Result({
       text: text,
@@ -29,7 +28,7 @@ export const uploadImage = async (req, res) => {
       imageAnalyzedText: analyzedText,
     })
     await newResult.save();
-    console.log({ analyzedText });
+
     res.json(analyzedText);
   } catch (e) {
     console.log(e);
@@ -40,6 +39,6 @@ export const uploadImage = async (req, res) => {
 };
 
 export const getImageAnalysishistory = async (req, res) => {
-  const results = await Result.find({});
+  const results = await Result.find({}).sort({ timestamp: -1 });
   res.json(results);
 }

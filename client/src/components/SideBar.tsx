@@ -21,8 +21,6 @@ function SideBar({ setIsSidebarOpen }: { setIsSidebarOpen: Function }) {
             console.log(error)
         }
     }, [])
-
-
     return (
         <div className='absolute inset-0  flex justify-start items-center z-20 backdrop-blur-sm h-screen'>
             <div className='w-full md:w-1/2 h-screen bg-secondary p-4 '>

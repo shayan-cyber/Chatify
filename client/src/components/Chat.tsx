@@ -9,7 +9,6 @@ function Chat({ chat }: { chat: ChatResponse }) {
     }
     return (
         <div>
-
             {
                 chat.type === MESSAGE_TYPES.USER_MESSAGE ? (
                     <div className="py-2 px-4 w-full bg-secondary-hover rounded-lg my-2" >

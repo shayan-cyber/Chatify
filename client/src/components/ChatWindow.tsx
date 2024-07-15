@@ -67,7 +67,6 @@ function ChatWindow() {
         try {
             const descriptions = response.filter(r => r.type === "analyzedImageText").map(r => r.data)
             const res = await getAnswer(descriptions, text)
-
             if (res) {
                 setResponse([...response,
                 {
@@ -88,7 +87,6 @@ function ChatWindow() {
         setIsLoading(false)
 
     }
-
     useEffect(() => {
         fetchTheme()
     }, [])

@@ -30,7 +30,7 @@ function ImageAnalysisHistoryChat({ chat }: { chat: ImageAnalysisHistory }) {
                         {chat.imagePath && (
                             <div className='flex justify-center'>
                                 <div>
-                                    <img src={process.env.VITE_SERVER_URL + "/" + chat.imagePath.replace("\\", "/")} alt="analyzedImageText" className='py-2 max-h-[40vh] w-auto h-auto' />
+                                    <img src={chat.imagePath} alt="analyzedImageText" className='py-2 max-h-[40vh] w-auto h-auto' />
                                 </div>
                             </div>
                         )}

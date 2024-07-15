@@ -1,4 +1,4 @@
-import { Brain, ChevronLeft } from 'lucide-react'
+import { Brain, ChevronLeft, Loader } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { getImageAnalysishistory } from '../utils/apiCall'
 import { toast } from 'sonner'
@@ -24,25 +24,33 @@ function SideBar({ setIsSidebarOpen }: { setIsSidebarOpen: Function }) {
 
 
     return (
-        <div className='absolute inset-0  flex justify-start items-center z-20 backdrop-blur-sm'>
+        <div className='absolute inset-0  flex justify-start items-center z-20 backdrop-blur-sm h-screen'>
             <div className='w-full md:w-1/2 h-screen bg-secondary p-4 '>
 
                 <div className='flex items-center gap-2'>
                     <h1 className='text-2xl font-bold'>Chatify</h1>
                     <Brain className='h-8 w-8' />
                 </div>
+                <h1 className='mt-10 mb-2 text-xl'>Image Analysis History</h1>
+                <div className='py-4 bg-primary text-primary rounded-lg px-2 my-4 h-full max-h-[85vh] overflow-y-auto'>
 
-                <div className='py-4 bg-primary text-primary rounded-lg px-2 my-4 max-h-[90vh] overflow-y-auto'>
+                    {imageAnalysisHistory.length > 0 ? (<>
+                        {imageAnalysisHistory.map((chat, index) => {
+                            return <>
 
-                    {imageAnalysisHistory.map((chat, index) => {
-                        return <>
+                                <ImageAnalysisHistoryChat chat={chat} key={
+                                    index
+                                } />
+                            </>
+                        })}
 
-                            <ImageAnalysisHistoryChat chat={chat} key={
-                                index
-                            } />
+                    </>) : (
+                        <>
+                            <div className='flex justify-center items-center h-full'>
+                                <Loader className='h-14 w-14 animate-spin' />
+                            </div>
                         </>
-                    })}
-
+                    )}
                 </div>
 
             </div>

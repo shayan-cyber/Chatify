@@ -13,5 +13,8 @@ export const toggleTheme = () => {
   if (body) {
     body.classList.toggle('dark')
     localStorage.theme = body.classList.contains('dark') ? 'dark' : 'light'
+    return body.classList.contains('dark') ? 'dark' : 'light'
+  
   }
+  return 'light'
 }

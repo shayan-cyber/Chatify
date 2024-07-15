@@ -1,6 +1,7 @@
 
 import { Brain } from 'lucide-react'
-function NavBar({toggleTheme}:{toggleTheme: () => void}) {
+import ThemeToggleButton from './ThemeToggleButton'
+function NavBar() {
     return (
 
         <div className='flex justify-between items-center w-full py-2 px-4'>
@@ -11,9 +12,10 @@ function NavBar({toggleTheme}:{toggleTheme: () => void}) {
             <div className='flex items-center'>
 
                 <button className='bg-primary text-primary border-primary px-4 py-2 rounded-md'>Embed</button>
-                <button className='bg-primary text-primary border-primary px-4 py-2 rounded-md' onClick={() => {
-                    toggleTheme()
-                }} >Dark Mode</button>
+             
+
+                    <ThemeToggleButton/>
+                
             </div>
         </div>
     )

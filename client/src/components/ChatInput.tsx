@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Image, SendHorizonal, Loader, X , Brain} from 'lucide-react';
+import { Image, SendHorizonal, Loader, X, Brain } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface ChatInputProps {
@@ -9,7 +9,7 @@ interface ChatInputProps {
     setText: Function,
     handleSend: Function,
     allowQuestions: boolean,
-    
+
     isLoading: boolean,
     handleAskQuestionFromGemini: Function
 }
@@ -48,16 +48,14 @@ function ChatInput({ image, setImage, text, setText, handleSend, allowQuestions,
                 </div>
 
             </div>
-            <div className='absolute bottom-4 left-0 right-0  '>
+            <div className='absolute bottom-4 left-0 right-0 text-white '>
                 <div className={allowQuestions && askingQuestion === true ? 'flex  justify-center items-center' : 'hidden'}>
                     <div className='w-3/4 flex justify-start px-6'>
                         <div className='bg-purple-600 px-2 py-1 flex justify-center items-center gap-2 rounded-t-lg'>
-                        <h1 className='text-xs'>Using Gemini</h1>
-                         <Brain className='w-3 h-3' />
+                            <h1 className='text-xs text-white'>Using Gemini</h1>
+                            <Brain className='w-3 h-3' />
                         </div>
-
                     </div>
-
                 </div>
                 <div className='flex  justify-center items-center'>
                     <div className='flex justify-between border-2 items-center border-gray-300 rounded-full bg-primary px-4 py-2 w-[90%] md:w-3/4'>
@@ -67,12 +65,18 @@ function ChatInput({ image, setImage, text, setText, handleSend, allowQuestions,
                             <h1 className='text-[.6rem] md:text-sm'>{isLoading ? 'Loading...' : askingQuestion ? 'Cancel Asking' : image ? `${image.name.slice(0, 5)}...${image.type}` : 'Upload Image'}</h1>
                             {isLoading ? <Loader className={'w-6 h-6 md:w-8 md:h-8  animate-spin'} /> :
                                 askingQuestion ? <X className={'w-6 h-6 md:w-8 md:h-8 text-white'} /> : <Image className={'w-6 h-6 md:w-8 md:h-8'} />
-
                             }
-
                         </button>
-                        <input type="text" className='w-full border-none outline-none text-gray-400 bg-transparent px-4 py-2 rounded-full' value={text} placeholder={askingQuestion ? 'Ask a question....' : 'Type your message here...'} onChange={(e) => {
+                        <input type="text" className='w-full border-none outline-none text-primary bg-transparent px-4 py-2 rounded-full' value={text} placeholder={askingQuestion ? 'Ask a question....' : 'Type your message here...'} onChange={(e) => {
                             setText(e.target.value)
+                        }} onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                if (askingQuestion) {
+                                    handleAskQuestionFromGemini(text)
+                                } else {
+                                    handleSend(image, text)
+                                }
+                            }
                         }} />
                         <input type="file" className='hidden' ref={inputRef} onChange={(e) => {
                             handleImageChange(e)

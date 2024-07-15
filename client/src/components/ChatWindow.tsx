@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react'
-import { fetchTheme, toggleTheme } from '../utils/themeToggler'
+import { fetchTheme } from '../utils/themeToggler'
 import Chats from './Chats'
 import ChatInput from './ChatInput'
 import { analyzeImage } from '../utils/apiCall'
@@ -9,6 +9,7 @@ import { getAnswer } from '../utils/gemini'
 import {  ChevronRight } from 'lucide-react'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
+import { MESSAGE_TYPES } from '../utils/constants'
 function ChatWindow() {
 
     const [image, setImage] = useState<File | null>(null)
@@ -35,12 +36,12 @@ function ChatWindow() {
             setResponse([
                 ...response,
                 {
-                    type: "userMessage",
+                    type: MESSAGE_TYPES.USER_MESSAGE,
                     data: text,
                     image: image,
                 },
                 {
-                    type: "analyzedImageText",
+                    type: MESSAGE_TYPES.ANALYZED_IMAGE_TEXT,
                     data: res,
                 }
 
@@ -66,15 +67,15 @@ function ChatWindow() {
         try {
             const descriptions = response.filter(r => r.type === "analyzedImageText").map(r => r.data)
             const res = await getAnswer(descriptions, text)
-            console.log({ res })
+
             if (res) {
                 setResponse([...response,
                 {
-                    type: "userMessage",
+                    type: MESSAGE_TYPES.USER_MESSAGE,
                     data: text,
                 },
                 {
-                    type: "geminiText",
+                    type: MESSAGE_TYPES.GEMINI_TEXT,
                     data: res,
                 }])
             }
@@ -97,7 +98,7 @@ function ChatWindow() {
             <button className='absolute top-1/2 left-2' onClick={() => setIsSidebarOpen(true)}>
                 <ChevronRight className='w-10 h-10' />
             </button>
-            <NavBar toggleTheme={toggleTheme} />
+            <NavBar/>
             {
                 isSidebarOpen &&
                 <SideBar setIsSidebarOpen={setIsSidebarOpen}/>

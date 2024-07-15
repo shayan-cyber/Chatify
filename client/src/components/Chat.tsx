@@ -4,6 +4,9 @@ import { Brain, Clipboard, Image, UserRound } from 'lucide-react'
 import { MESSAGE_TYPES } from '../utils/constants'
 function Chat({ chat }: { chat: ChatResponse }) {
     const [toggleImage, setToggleImage] = useState(false)
+    const copytoClipboard = (text: string) => {
+        navigator.clipboard.writeText(text);
+    }
     return (
         <div>
 
@@ -24,7 +27,11 @@ function Chat({ chat }: { chat: ChatResponse }) {
                                         }}>
                                             <Image className='text-xl' />
                                         </button>
-                                        <Clipboard className='text-xl' />
+                                        <button onClick={() => {
+                                            copytoClipboard(chat.data)
+                                        }}>
+                                            <Clipboard className='text-xl' />
+                                        </button>
 
                                     </div>
 
@@ -52,16 +59,18 @@ function Chat({ chat }: { chat: ChatResponse }) {
                         <div className='flex justify-start items-center mb-3 gap-2'>
                             <h1 className='text-lg font-semibold'>{
                                 chat.type === "geminiText" ? "Gemini" : "Chatify"
-                                }</h1>
+                            }</h1>
                             <Brain className='h-4 w-4' />
                         </div>
                         <div className='text-sm dark:bg-black dark:border-gray-700 rounded-xl border-2 '>
                             <div className=' bg-gray-200 dark:bg-[#2f2f2f] p-2 rounded-t-lg'>
                                 <div className='flex justify-between'>
                                     <p className='text-lg'>Analyzed text</p>
-                                    <div className='flex gap-4'>
+                                    <button onClick={() => {
+                                        copytoClipboard(chat.data)
+                                    }}>
                                         <Clipboard className='text-xl' />
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                             <div className='p-4 text-[1rem]'>

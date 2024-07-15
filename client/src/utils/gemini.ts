@@ -17,7 +17,7 @@ const chat = model.startChat({
 });
 export async function getAnswer(description:string[], question:string) {
   try{
-    const prompt = `Description: ${description} , Question: ${question} , Depending on the description given answer the question(JSON key should be answer)`
+    const prompt = `Description: ${description} , Question: ${question} , Depending on the description given answer the question(JSON key should be answer, give only one answer)`
     const result = await chat.sendMessage(prompt);
     let text:any = result.response.text();
     text = JSON.parse(text)

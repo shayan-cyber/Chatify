@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { ChatResponse } from '../types'
-import { Brain, Clipboard, Image, UserRound } from 'lucide-react'
+import { Brain, Clipboard, Image, UserRound, ImageOff } from 'lucide-react'
 import { MESSAGE_TYPES } from '../utils/constants'
 function Chat({ chat }: { chat: ChatResponse }) {
-    const [toggleImage, setToggleImage] = useState(false)
+    const [toggleImage, setToggleImage] = useState(true)
     const copytoClipboard = (text: string) => {
         navigator.clipboard.writeText(text);
     }
@@ -24,7 +24,9 @@ function Chat({ chat }: { chat: ChatResponse }) {
                                         <button className={chat.image ? '' : 'hidden'} onClick={() => {
                                             setToggleImage(!toggleImage)
                                         }}>
-                                            <Image className='text-xl' />
+                                            {
+                                                toggleImage ? <ImageOff className='text-xl' /> : <Image className='text-xl' />
+                                            }
                                         </button>
                                         <button onClick={() => {
                                             copytoClipboard(chat.data)

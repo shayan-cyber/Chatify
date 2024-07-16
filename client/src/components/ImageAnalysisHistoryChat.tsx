@@ -1,6 +1,6 @@
 import  { useState } from 'react'
 import { ImageAnalysisHistory } from '../types'
-import { Brain, Clipboard, Image } from 'lucide-react'
+import { Brain, Clipboard, Image , ImageOff} from 'lucide-react'
 function ImageAnalysisHistoryChat({ chat }: { chat: ImageAnalysisHistory }) {
     const [toggleImage, setToggleImage] = useState(false)
     return (
@@ -17,7 +17,9 @@ function ImageAnalysisHistoryChat({ chat }: { chat: ImageAnalysisHistory }) {
                             <button className={chat.imagePath ? '' : 'hidden'} onClick={() => {
                                 setToggleImage(!toggleImage)
                             }}>
-                                <Image className='text-xl' />
+                                {
+                                    toggleImage ? <ImageOff className='text-xl' /> : <Image className='text-xl' />
+                                }
                             </button>
                             <Clipboard className='text-xl' />
 

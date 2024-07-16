@@ -4,6 +4,11 @@
 
 Introducing the Chatify – your new and interactive assistant for talking with your image. This web app is designed to make extracting text from images and answering questions about them as easy task.
 
+## Demo
+
+https://github.com/user-attachments/assets/4d694c5c-0555-4864-a29e-b27788a8d5cc
+
+
 ## Screenshots
 
 ![App Screenshot](https://i.imgur.com/PtaYxQQ.png)
@@ -112,6 +117,3 @@ http://localhost:3000/
 
 
 
-## Demo
-
-https://github.com/user-attachments/assets/4d694c5c-0555-4864-a29e-b27788a8d5cc

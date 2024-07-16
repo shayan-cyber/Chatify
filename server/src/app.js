@@ -9,7 +9,11 @@ import routes from './routes/index.js';
 import path from 'path';
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200
+  };
+app.use(cors(corsOptions));
 
 connectDB();
 

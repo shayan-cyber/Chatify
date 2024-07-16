@@ -11,6 +11,8 @@ import path from 'path';
 const app = express();
 const corsOptions = {
     origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200
   };
 app.use(cors(corsOptions));

@@ -64,7 +64,7 @@ function Chat({ chat }: { chat: ChatResponse }) {
                         <div className='text-sm dark:bg-black dark:border-gray-700 rounded-xl border-2 '>
                             <div className=' bg-gray-200 dark:bg-[#2f2f2f] p-2 rounded-t-lg'>
                                 <div className='flex justify-between'>
-                                    <p className='text-lg'>Analyzed text</p>
+                                    <p className='text-lg font-semibold'>Analyzed text</p>
                                     <button onClick={() => {
                                         copytoClipboard(chat.data)
                                     }}>

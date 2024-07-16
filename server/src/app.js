@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 
 connectDB();
-app.use('/uploads', express.static('uploads'));
+
 
 app.use(bodyParser.json());
 

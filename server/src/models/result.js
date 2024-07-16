@@ -10,7 +10,7 @@ const resultSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imagePath:{
+  imagePath: {
     type: String,
     required: true,
   },

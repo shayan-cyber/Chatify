@@ -8,9 +8,6 @@ export const uploadImage = async (req, res) => {
 
     const image = req.file;
     const { text } = req.body;
-
-
-
     if (!image) {
       return res.status(400).json({
         message: 'No image provided',
@@ -21,7 +18,6 @@ export const uploadImage = async (req, res) => {
     const analyzedData = await OCR(secure_url);
     const analyzedText = analyzedData.text;
 
-
     const newResult = new Result({
       text: text,
       imagePath: secure_url,
@@ -30,6 +26,8 @@ export const uploadImage = async (req, res) => {
     await newResult.save();
 
     res.json(analyzedText);
+
+    
   } catch (e) {
     console.log(e);
     res.status(500).json({

@@ -50,10 +50,10 @@ npm i
 make a .env file and add
 ```bash
 PORT=3000
-MONGO_URI=""
-CLOUD_NAME=""
-CLOUDINARY_KEY=""
-CLOUDINARY_SECRET=""
+MONGO_URI="your_mongoDB_URL"
+CLOUD_NAME="your_cloudinary_cloud_name"
+CLOUDINARY_KEY="your_cloudinary_key"
+CLOUDINARY_SECRET="your_cloudinary_secret"
 ```
 
 Run the server
@@ -111,3 +111,7 @@ http://localhost:3000/
 
 
 
+
+## Demo
+
+https://github.com/user-attachments/assets/4d694c5c-0555-4864-a29e-b27788a8d5cc

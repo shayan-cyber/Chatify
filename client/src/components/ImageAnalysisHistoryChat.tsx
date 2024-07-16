@@ -26,9 +26,10 @@ function ImageAnalysisHistoryChat({ chat }: { chat: ImageAnalysisHistory }) {
                     </div>
 
                     <div className={toggleImage ? 'block' : 'hidden'}>
-
+                        <h1 className='text-center my-1 text-sm'><span className='text-base font-semibold'>Your Text: </span> {chat?.text}</h1>
                         {chat.imagePath && (
                             <div className='flex justify-center'>
+                                
                                 <div>
                                     <img src={chat.imagePath} alt="analyzedImageText" className='py-2 max-h-[40vh] w-auto h-auto' />
                                 </div>

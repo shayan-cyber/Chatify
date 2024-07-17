@@ -7,7 +7,8 @@ Introducing the Chatify – your new and interactive assistant for talking with 
 ## Demo
 
 https://github.com/user-attachments/assets/4d694c5c-0555-4864-a29e-b27788a8d5cc
-
+### Deployed LINK:(little bit slow, using free tier of render for deployment of server)
+https://chatify-jade-eight.vercel.app/
 
 ## Screenshots
 
@@ -36,6 +37,8 @@ https://github.com/user-attachments/assets/4d694c5c-0555-4864-a29e-b27788a8d5cc
 
 **Server:** Node, Express, MongoDB, Cloudinary
 
+### Why Did I choose Cloudinary?
+#### Needed to save the uploaded images , using server's disk storage is not optimal cause it'll increase the resources consumed my server system, So went for Cloudinary to save those images and get a url to save in mongoDB table.
 
 ## Installation
 
